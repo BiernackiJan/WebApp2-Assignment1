@@ -6,6 +6,7 @@ Name: Jan Biernacki
 
 This repository includes the files for the First Assignment - Web Applications 2 in the first semester of my 3rd year of study
 
+
 ### Features.
  
 + Added a Top Rated movies page
