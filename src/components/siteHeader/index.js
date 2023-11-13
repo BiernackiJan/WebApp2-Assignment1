@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import HomeIcon from "@mui/icons-material/Home"
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import WatchListIcon from "@mui/icons-material/PlaylistAdd";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -24,12 +27,12 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Home", path: "/" },
+    { icon: <HomeIcon />, path: "/" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/topRated" },
     { label: "Now Playing", path: "/movies/nowPlaying" },
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "WatchList", path: "/movies/watchList" },
+    { icon: <FavoriteIcon />, path: "/movies/favorites" },
+    { label: <WatchListIcon />, path: "/movies/watchList" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -78,7 +81,7 @@ const SiteHeader = ({ history }) => {
                 >
                   {menuOptions.map((opt) => (
                     <MenuItem
-                      key={opt.label}
+                      key={opt.label }
                       onClick={() => handleMenuSelect(opt.path)}
                     >
                       {opt.label}
@@ -90,11 +93,11 @@ const SiteHeader = ({ history }) => {
               <>
                 {menuOptions.map((opt) => (
                   <Button
-                    key={opt.label}
+                    key={opt.label || opt.icon}
                     color="inherit"
                     onClick={() => handleMenuSelect(opt.path)}
                   >
-                    {opt.label}
+                    {opt.label || opt.icon}
                   </Button>
                 ))}
               </>
