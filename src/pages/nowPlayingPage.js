@@ -1,15 +1,15 @@
 import React from "react";
-import { getUpcomingMovies } from "../api/tmdb-api";
-import PageTemplate from '../components/templateUpcomingPage';
+import { getNowPlayingMovies } from "../api/tmdb-api";
+import PageTemplate from '../components/templateNowPlayingPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToWatchListIcon from '../components/cardIcons/addToWatchList'
 
 
 
-const UpcomingMoviesPage = (props) => {
+const NowPlayingPage = (props) => {
 
-  const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
+  const {  data, error, isLoading, isError }  = useQuery('now playing', getNowPlayingMovies)
 
   if (isLoading) {
     return <Spinner />
@@ -19,21 +19,21 @@ const UpcomingMoviesPage = (props) => {
     return <h1>{error.message}</h1>
   }  
 
-  const upcomingMovies = data.results;
+  const nowPlaying = data.results;
 
   // Redundant, but necessary to avoid app crashing.
-  const upcomingList = upcomingMovies.filter(m => m.upcomingList)
-  localStorage.setItem('watchList', JSON.stringify(upcomingList))
+  const nowPlayingList = nowPlaying.filter(m => m.nowPLayingList)
+  localStorage.setItem('watchList', JSON.stringify(nowPlayingList))
   const addToWatchList = (movieId) => true 
 
   return (
     <PageTemplate
-      title="Upcoming Movies"
-      upcomingMovies={upcomingMovies}
+      title="Now Playing"
+      nowPlaying={nowPlaying}
       action={(movie) => {
         return <AddToWatchListIcon movie={movie} />
       }}
     />
   );
 };
-export default UpcomingMoviesPage;
+export default NowPlayingPage;
