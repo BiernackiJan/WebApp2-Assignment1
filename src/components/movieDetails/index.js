@@ -6,9 +6,14 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { getCast, getActorImages } from "../../api/tmdb-api";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import { useParams } from "react-router-dom";
+import ActorList from "../actorList";
+import Grid from "@mui/material/Grid";
+import { useQuery } from "react-query";
 
 
 
@@ -22,9 +27,34 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {  // Don't miss this!
-  const [drawerOpen, setDrawerOpen] = useState(false);
+const MovieDetails = ({ movie }) => {
+  
 
+  const {id} = useParams();
+  const {data: credits} = useQuery(["credits", {id}], () => getCast(id))
+
+  const { data: bestActors, error: bestActorsError } = useQuery(
+    ["bestActors", id],
+    () => credits?.cast.slice(0, 9),
+    {
+      enabled: !!credits, // only run if credits exists
+    }
+  );
+
+  const { data: actorsImages, error: actorsImagesError } = useQuery(
+    ["actorsImages", bestActors?.map((actor) => actor.id)],// array of actor ids
+    () =>
+      Promise.all(// get all images for all actors
+        bestActors?.map((actor) => getActorImages(actor.id)) || [] // if bestActors is undefined, pass an empty array
+      ).then((images) =>
+        images.map((image) => ({// map the results to an array of objects with id and url properties
+          id: image.file_path,// use the file_path as the id
+          url: 'https://image.tmdb.org/t/p/w200/${image.file_path}', // use the file_path as the url
+        }))
+      )
+  );
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
     <>
       <Typography variant="h5" component="h3">
@@ -72,6 +102,11 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
             <Chip label={g.name} sx={{...chip}} />
           </li>
         ))}
+
+      
+
+
+
       <Fab
         color="secondary"
         variant="extended"
@@ -89,6 +124,13 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         <MovieReviews movie={movie} />
       </Drawer>
       </Paper>
+
+      <Typography variant="h5" component="h3">
+        Top Actors
+      </Typography>
+      <Grid container spacing={2}>
+        {bestActors && <ActorList actors={bestActors} images={actorsImages} />}
+      </Grid>
       </>
   );
 };
