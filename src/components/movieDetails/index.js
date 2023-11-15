@@ -30,7 +30,7 @@ const chip = { margin: 0.5 };
 const MovieDetails = ({ movie }) => {
   
 
-  const {id} = useParams();
+  const {id} = useParams(); // grabs the id from the url
   const {data: credits} = useQuery(["credits", {id}], () => getCast(id))
 
   const { data: bestActors, error: bestActorsError } = useQuery(
@@ -103,7 +103,7 @@ const MovieDetails = ({ movie }) => {
           </li>
         ))}
 
-      
+
 
 
 
