@@ -10,8 +10,8 @@ This repository includes the files for the First Assignment - Web Applications 2
 ### Features.
  
 + Added a Top Rated movies page
-+ Feature 2
-+ Feature 3
++ Added now playing movies in theaters/cinemas page
++ Added trending Actors
 + etc
 + etc
 

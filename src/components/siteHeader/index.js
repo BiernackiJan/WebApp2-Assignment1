@@ -14,7 +14,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import HomeIcon from "@mui/icons-material/Home"
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WatchListIcon from "@mui/icons-material/PlaylistAdd";
-import AvatarIcon from "@mui/icons-material/Person";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -28,16 +27,15 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const actorOptions = [
-    // { icon: < AvatarIcon />},
-    { label: "Actors", path: "/movies/actors"}
+    {label: "Actors", path: "/movies/actors"}
   ]
 
   const menuOptions = [
-    { icon: <HomeIcon />, path: "/" },
+    { label: <HomeIcon />, path: "/" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/topRated" },
     { label: "Now Playing", path: "/movies/nowPlaying" },
-    { icon: <FavoriteIcon />, path: "/movies/favorites" },
+    { label: <FavoriteIcon />, path: "/movies/favorites" },
     { label: <WatchListIcon />, path: "/movies/watchList" },
   ];
 
@@ -110,11 +108,11 @@ const SiteHeader = ({ history }) => {
               <>
                 {menuOptions.map((opt) => (
                   <Button
-                    key={opt.label || opt.icon}
+                    key={opt.label}
                     color="inherit"
                     onClick={() => handleMenuSelect(opt.path)}
                   >
-                    {opt.label || opt.icon}
+                    {opt.label}
                   </Button>
                 ))}
               </>
