@@ -19,16 +19,11 @@ const ActorsPage = (props) => {
     return <h1>{error.message}</h1>
   }  
   const actors = data.results;
-
-  console.log(actors)
   
   return (
     <PageTemplate
       title="Weekly Trending Actors"
       actors={actors}
-      action={(actors) => {
-        return <AddToFavoritesIcon actor={actors} />
-      }}
     />
   );
 };

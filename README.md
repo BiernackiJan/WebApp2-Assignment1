@@ -11,9 +11,10 @@ This repository includes the files for the First Assignment - Web Applications 2
  
 + Added a Top Rated movies page
 + Added now playing movies in theaters/cinemas page
-+ Added trending Actors
-+ etc
-+ etc
++ Added Daily trending actors page
++ Added Weekly trending actors page
++ Changed page header to look nicer and cleaner
++ 
 
 ## Setup requirements.
 

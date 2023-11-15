@@ -46,7 +46,7 @@ const SiteHeader = ({ history }) => {
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleMenu = (event) => {

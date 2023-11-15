@@ -6,7 +6,6 @@ import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
 
-
 const ActorsPage = (props) => {
 
   const {  data, error, isLoading, isError }  = useQuery('discover', getActorsDaily)
@@ -18,15 +17,14 @@ const ActorsPage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
+
   const actors = data.results;
   
   return (
+    // window.location.reload(),
     <PageTemplate
       title="Daily Trending Actors"
       actors={actors}
-      action={(actors) => {
-        return <AddToFavoritesIcon actor={actors} />
-      }}
     />
   );
 };
