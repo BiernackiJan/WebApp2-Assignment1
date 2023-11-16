@@ -31,8 +31,8 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const actorOptions = [
-    {label: "Trending Daily Actors",  path: "/movies/actorsDaily"},
-    {label: "Trending Weekly Actors",  path: "/movies/actorsWeekly"}
+    {label: "Trending Daily Actors",  path: "/actors/actorsDaily"},
+    {label: "Trending Weekly Actors",  path: "/actors/actorsWeekly"}
   ]
 
   const menuOptions = [
@@ -47,6 +47,11 @@ const SiteHeader = ({ history }) => {
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
     // window.location.reload();
+  };
+
+  const handleTrendingSelect = (pageURL) => {
+    navigate(pageURL, { replace: true });
+    window.location.reload();
   };
 
   const handleMenu = (event) => {
@@ -91,7 +96,7 @@ const SiteHeader = ({ history }) => {
                   {actorOptions.map((opt) => (
                     <MenuItem
                       key={opt.label }
-                      onClick={() => handleMenuSelect(opt.path)}
+                      onClick={() => handleTrendingSelect(opt.path)}
                     >
                       {opt.label}
                     </MenuItem>

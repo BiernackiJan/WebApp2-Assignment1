@@ -175,3 +175,22 @@ export const getActorsDaily = () => {
      throw error
   });
 };
+
+export const getActor = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // console.log(data)
+      return data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

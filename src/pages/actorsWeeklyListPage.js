@@ -3,8 +3,6 @@ import { getActorsWeekly } from "../api/tmdb-api";
 import PageTemplate from '../components/templateActorsListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
-
 
 
 const ActorsPage = (props) => {

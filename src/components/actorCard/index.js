@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { getActorImages } from "../../api/tmdb-api";
+import { Link } from "react-router-dom";
 
 const ActorCard = ({ actor }) => {
   const { data: images, error } = useQuery(["actorImages", actor.id], () => getActorImages(actor.id));
@@ -17,6 +18,7 @@ const ActorCard = ({ actor }) => {
 
   return (
     <Card sx={{ marginTop: 5, maxWidth: 300 }}>
+      <Link to={`/actors/${actor.id}`}>
       {firstImage && (
         <CardMedia
           component="img"
@@ -25,12 +27,14 @@ const ActorCard = ({ actor }) => {
           alt={actor.name}
         />
       )}
+      </Link>
       <CardContent>
         <Typography variant="h6" component="div">
           {actor.name}
         </Typography>
       </CardContent>
     </Card>
+    
   );
 };
 
