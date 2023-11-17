@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MovieHeader from "../headerMovieList";
-import { useParams } from 'react-router-dom';
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getActorImages } from "../../api/tmdb-api";
-import { useQuery } from "react-query";
-import Spinner from '../spinner'
+import MovieList from "../movieList";
 
 
-const TemplateActorDetailsPage = ({ title , children}) => {
-  const { id } = useParams();
-  const { data , error, isLoading, isError } = useQuery(
-    ["images", { id: id }],
-    () => getActorImages(id)
-  );
 
-  
-  if (isLoading) {
-    return <Spinner />;
-  }
+const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDetails }) => {
+  const id = actorDetails?.id
 
-
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
-  // const images = data.posters 
-  const firstImage = data?.profiles[0]?.file_path;
-
+  let displayedMovies = allMovies
+  console.log("actMovies" , actorDetails)
+    
   return (
     <>
       <MovieHeader title={title} />
@@ -41,22 +26,31 @@ const TemplateActorDetailsPage = ({ title , children}) => {
           }}>
             <ImageList 
                 cols={1}>
-                  <ImageListItem key={firstImage} cols={1}>
+                  <ImageListItem key={actorDetails?.profile_path} cols={1}>
                   <img
-                      src={`https://image.tmdb.org/t/p/w500/${firstImage}`}
-                      alt={firstImage}
+                      src={`https://image.tmdb.org/t/p/w500/${actorDetails?.profile_path}`}
+                      alt={actorDetails?.profile_path}
                       style={{ width: "80%" , height: "auto"}}
                   />
                   </ImageListItem>
             </ImageList>
           </div>
         </Grid>
+      
 
-        <Grid item xs={9} sx={{ padding: "0px", marginLeft: -10, marginRight: -10, marginTop: 2 }}>
-          
-          {children}
+        <Grid item xs={9}>
+          <Grid container>
+            <Grid item xs={12}>
+              {children}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
+
+      <Grid item container spacing={5}>
+        <MovieList action={action} movies={displayedMovies}></MovieList>
+      </Grid>
+      
     </>
   );
 };

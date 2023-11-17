@@ -18,16 +18,16 @@ const ActorCard = ({ actor }) => {
 
   return (
     <Card sx={{ marginTop: 5, maxWidth: 300 }}>
-      <Link to={`/actors/${actor.id}`}>
       {firstImage && (
+        <Link to={`/movies/:id/actors/${actor.id}`}>
         <CardMedia
           component="img"
           height="300"
           image={`https://image.tmdb.org/t/p/w500${firstImage}`}
           alt={actor.name}
         />
+        </Link>
       )}
-      </Link>
       <CardContent>
         <Typography variant="h6" component="div">
           {actor.name}
