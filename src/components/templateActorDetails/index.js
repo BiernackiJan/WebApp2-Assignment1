@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import MovieList from "../movieList";
+import Typography from "@mui/material/Typography";
 
 
 
@@ -46,6 +47,14 @@ const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDe
           </Grid>
         </Grid>
       </Grid>
+
+      <br />
+
+      <Typography variant="h3" component="h3">
+        Starred In:  
+      </Typography>
+      
+      <hr />
 
       <Grid item container spacing={5}>
         <MovieList action={action} movies={displayedMovies}></MovieList>
