@@ -41,7 +41,7 @@ const ActorPage = () => {
         actorDetails={actor}
         title="Actor Information"
         action={(movies) => {
-          return <AddToWatchListIcon movies={movies} />;
+          return <AddToWatchListIcon movie={movies} />;
         }}>
         <ActorDetails actorDetails={actor} />
         </PageTemplate>
