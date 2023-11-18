@@ -6,7 +6,6 @@ import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
 
-
 const HomePage = (props) => {
 
   const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
@@ -30,7 +29,9 @@ const HomePage = (props) => {
       title="Discover Movies"
       movies={movies}
       action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
+        return ( 
+         <AddToFavoritesIcon movie={movie} />
+        );
       }}
     />
   );

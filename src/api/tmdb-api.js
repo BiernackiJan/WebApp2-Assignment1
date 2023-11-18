@@ -213,3 +213,24 @@ export const getActorCredits = (id) => {
       throw error;
     });
 };
+
+
+export const getRecommendedMovies = (movie_id) => {
+  console.log("fetches recommendations")
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.json().message);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    // console.log(data)
+    return data;
+  })
+  .catch((error) => {
+     throw error
+  });
+}; 
+

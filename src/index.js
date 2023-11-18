@@ -17,6 +17,7 @@ import WatchListPage from "./pages/watchListPage";
 import ActorsWeeklyPage from "./pages/actorsWeeklyListPage";
 import ActorsDailyPage from "./pages/actorsDailyListPage";
 import ActorPage from "./pages/actorDetailsPage";
+import RecommendMoviesPage from "./pages/recommendedMoviesPage";
 
 
 const queryClient = new QueryClient({
@@ -36,19 +37,24 @@ const App = () => {
       <SiteHeader />
       <MoviesContextProvider>
       <Routes>
-        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
         <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-        <Route path="/movies/:id/actors/:id" element={<ActorPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
-        <Route path="/actors/actorsWeekly" element={<ActorsWeeklyPage />} />
-        <Route path="/actors/actorsDaily" element={<ActorsDailyPage />} />
-        <Route path="/" element={<HomePage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/movies/nowPlaying" element={<NowPlayingPage />} />
         <Route path="/movies/topRated" element={<TopRatedMoviePage />} />
         <Route path="/movies/watchList" element={<WatchListPage />} />
-        <Route path="*" element={ <Navigate to="/" /> } />
+        <Route path="/movies/:id/recommendations" element={<RecommendMoviesPage />} />
+
         <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+
+        <Route path="/actors/actorsWeekly" element={<ActorsWeeklyPage />} />
+        <Route path="/actors/actorsDaily" element={<ActorsDailyPage />} />
+        <Route path="/movies/:id/actors/:id" element={<ActorPage />} />
+
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={ <Navigate to="/" /> } />
+
       </Routes>
       </MoviesContextProvider>
     </BrowserRouter>

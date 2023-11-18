@@ -6,7 +6,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import WatchListIcon from "@mui/icons-material/PlaylistAdd";
@@ -15,11 +14,18 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import Avatar from '@mui/material/Avatar';
+import InfoIcon from "@mui/icons-material/Info";
+import { Tooltip } from "@mui/material";
+import RecommendedIcon from '@mui/icons-material/NewReleases';
+import { getRecommendedMovies } from "../../api/tmdb-api";
+
 
 export default function MovieCard({ movie, action }) {
   const { favorites, addToFavorites } = useContext(MoviesContext);
 
   const { watchList, addToWatchList } = useContext(MoviesContext);
+
+  const id = movie.id;
 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
@@ -43,9 +49,14 @@ export default function MovieCard({ movie, action }) {
     addToWatchList(movie);
   };
 
+  const handleGetRecommendedMovies = (e) => {
+    e.preventDefault();
+    getRecommendedMovies(movie.id);
+  };
+
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 400 }}>
       <CardHeader
         avatar={
           <React.Fragment>
@@ -91,12 +102,19 @@ export default function MovieCard({ movie, action }) {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions >
         {action(movie)}
+        <div style={{flexGrow: 1}}/>
+        <Link to={`/movies/${id}/recommendations`}>
+          <Tooltip title="Recommended Movies" placement="bottom" arrow>
+            <RecommendedIcon color="primary" fontSize="large"/>
+          </Tooltip>
+        </Link>
+        <div style={{ flexGrow: 1, marginRight: 10 }} />
         <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
+          <Tooltip title="More Info" placement="bottom" arrow>
+            <InfoIcon color="primary" fontSize="large"  />
+          </Tooltip>
         </Link>
       </CardActions>
     </Card>

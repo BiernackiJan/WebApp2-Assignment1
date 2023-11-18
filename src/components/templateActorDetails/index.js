@@ -12,7 +12,7 @@ const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDe
   const id = actorDetails?.id
 
   let displayedMovies = allMovies
-  console.log("actMovies" , actorDetails)
+  // console.log("actMovies" , actorDetails)
     
   return (
     <>
