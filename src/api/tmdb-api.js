@@ -216,7 +216,6 @@ export const getActorCredits = (id) => {
 
 
 export const getRecommendedMovies = (movie_id) => {
-  console.log("fetches recommendations")
   return fetch(
     `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
   ).then((response) => {

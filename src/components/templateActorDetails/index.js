@@ -39,7 +39,7 @@ const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDe
         </Grid>
       
 
-        <Grid item xs={9}>
+        <Grid item xs={9} sx={{marginLeft: -10, marginTop: 1 }}>
           <Grid container>
             <Grid item xs={12}>
               {children}

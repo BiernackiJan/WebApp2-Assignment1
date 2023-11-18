@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { getActorImages } from "../../api/tmdb-api";
+import img from '../../images/actor-place-holder-image.jpg'
 import { Link } from "react-router-dom";
 
 const ActorCard = ({ actor }) => {
@@ -18,16 +19,18 @@ const ActorCard = ({ actor }) => {
 
   return (
     <Card sx={{ marginTop: 5, maxWidth: 300 }}>
-      {firstImage && (
         <Link to={`/movies/:id/actors/${actor.id}`}>
         <CardMedia
           component="img"
           height="300"
-          image={`https://image.tmdb.org/t/p/w500${firstImage}`}
+          image={
+            actor.profile_path
+            ? `https://image.tmdb.org/t/p/w500${firstImage}`
+            : img
+            }
           alt={actor.name}
         />
         </Link>
-      )}
       <CardContent>
         <Typography variant="h6" component="div">
           {actor.name}

@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import ActorList from "../actorList";
 import Grid from "@mui/material/Grid";
 import { useQuery } from "react-query";
+import ViewMore from "../cardIcons/viewMore";
 
 
 
@@ -30,6 +31,7 @@ const chip = { margin: 0.5 };
 const MovieDetails = ({ movie }) => {
   const {id} = useParams(); 
   const {data: credits} = useQuery(["credits", {id}], () => getCast(id))
+
 
   const { data: bestActors, error: bestActorsError } = useQuery(
     ["bestActors", id],
@@ -125,7 +127,9 @@ const MovieDetails = ({ movie }) => {
       </Typography>
       <Grid container spacing={2}>
         {bestActors && <ActorList actors={bestActors} images={actorsImages} />}
+        <ViewMore movie={movie}/>
       </Grid>
+      
       </>
   );
 };

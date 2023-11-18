@@ -5,7 +5,6 @@ import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
 
 function RecommendedMoviesPageTemplate({ recommendedMovies, title, action }) {  
-  console.log('1', recommendedMovies)
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);

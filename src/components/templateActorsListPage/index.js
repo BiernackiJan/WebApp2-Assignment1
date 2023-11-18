@@ -7,8 +7,8 @@ import { getActorImages } from "../../api/tmdb-api";
 
 
 
-function ActorsListPageTemplate({ actors, title }) {  
-
+function ActorsListPageTemplate({ actors, title }) {
+  
   const { data: actorImage} = useQuery(
     actors.map((actor) => actor.id),
     () => Promise.all(actors.map((actor) => getActorImages(actor.id))).then((images) =>
