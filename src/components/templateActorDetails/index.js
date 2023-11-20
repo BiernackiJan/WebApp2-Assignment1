@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 
 
 const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDetails }) => {
-  const id = actorDetails?.id
 
   let displayedMovies = allMovies
   // console.log("actMovies" , actorDetails)

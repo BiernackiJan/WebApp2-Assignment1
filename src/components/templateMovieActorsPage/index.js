@@ -11,22 +11,11 @@ import Button from "@mui/material/Button";
 
 function MovieCastListPageTemplate({ movieCast,  title }) {
     
-    let cast = movieCast.cast
-    let crew = movieCast.crew    
+    let cast = movieCast.cast    
 
     const { data: actorImage} = useQuery(
       cast.map((actor) => actor.id),
       () => Promise.all(cast.map((actor) => getActorImages(actor.id))).then((images) =>
-        images.map((image) => ({
-          id: image.file_path,
-          url: `https://image.tmdb.org/t/p/w200/${image.file_path}`,
-        }))
-      )
-    );
-
-    const { data: crewImage} = useQuery(
-      crew.map((actor) => actor.id),
-      () => Promise.all(crew.map((actor) => getActorImages(actor.id))).then((images) =>
         images.map((image) => ({
           id: image.file_path,
           url: `https://image.tmdb.org/t/p/w200/${image.file_path}`,
@@ -45,7 +34,6 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
 
     const handleMenuSelect = (pageURL) => {
       navigate(pageURL, { replace: true });
-      // window.location.reload();
     };
 
     const containerStyle = {
@@ -60,7 +48,6 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
     const navigate = useNavigate();
 
     const actorImages = actorImage
-    const crewImages = crewImage
   
     return (
       <>
@@ -92,13 +79,6 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
         </Typography>
         <Grid item container spacing={5}>
           <ActorList images={actorImages} actors={cast}></ActorList>
-        </Grid>
-
-        <Typography variant="h3" component="h3" sx={{marginTop: 10, marginBottom: -3}}>
-          Crew:  
-        </Typography>
-        <Grid item container spacing={5}>
-          <ActorList images={crewImages} actors={crew}></ActorList>
         </Grid>
       </Grid>
       </>

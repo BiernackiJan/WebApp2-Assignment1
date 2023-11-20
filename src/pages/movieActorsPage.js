@@ -1,12 +1,12 @@
 import React from "react";
-import PageTemplate from '../components/templateMovieCastPage';
+import PageTemplate from '../components/templateMovieActorsPage';
 import { useQuery } from 'react-query';
 import { getCast } from "../api/tmdb-api";
 import { useParams } from "react-router-dom";
 import Spinner from '../components/spinner';
 
 
-const MovieCastPage = () => {
+const MovieActorsPage = () => {
     const { id } = useParams(); 
     const {data: credits, error, isLoading, isError } = useQuery(
         ["credits", {id: id}], 
@@ -22,14 +22,16 @@ const MovieCastPage = () => {
 
     const movieCast = credits
 
+    // console.log("Movie Actors Page", movieCast)
+
     return (
         <>
         <PageTemplate
             movieCast={movieCast}
-            title={'All Movie Cast'}
+            title={'Movie Actors'}
         />
         </>
         );
     };
 
-export default MovieCastPage;
+export default MovieActorsPage;

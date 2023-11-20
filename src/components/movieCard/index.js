@@ -104,18 +104,21 @@ export default function MovieCard({ movie, action }) {
       </CardContent>
       <CardActions >
         {action(movie)}
-        <div style={{flexGrow: 1}}/>
-        <Link to={`/movies/${id}/recommendations`}>
-          <Tooltip title="Recommended Movies" placement="bottom" arrow>
-            <RecommendedIcon color="primary" fontSize="large"/>
-          </Tooltip>
-        </Link>
-        <div style={{ flexGrow: 1, marginRight: 10 }} />
-        <Link to={`/movies/${movie.id}`}>
-          <Tooltip title="More Info" placement="bottom" arrow>
-            <InfoIcon color="primary" fontSize="large"  />
-          </Tooltip>
-        </Link>
+        <div style={{flexGrow: 1}}></div>
+        <div style={{flexGrow: 2}}></div>
+        <div style={{flexGrow: 2}}>
+          <Link to={`/movies/${id}/recommendations`}>
+            <Tooltip title="Recommended Movies" placement="bottom" arrow>
+              <RecommendedIcon color="primary" fontSize="large"/>
+            </Tooltip>
+          </Link>
+        </div>
+        <div style={{ flexGrow: 2}} />
+          <Link to={`/movies/${movie.id}`}>
+            <Tooltip title="More Info" placement="bottom" arrow>
+              <InfoIcon color="primary" fontSize="large"  />
+            </Tooltip>
+          </Link>
       </CardActions>
     </Card>
   );

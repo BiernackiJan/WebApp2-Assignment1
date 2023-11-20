@@ -1,11 +1,13 @@
+import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
-
-
+import Toolbar from "@mui/material/Toolbar";
+import AppBar from "@mui/material/AppBar";
 
 const ActorDetails = ({ actorDetails }) => {
   return (
     <>
+      <Grid></Grid>
       <Typography variant="h3" component="h2">
         {actorDetails?.name}
       </Typography>
