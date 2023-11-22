@@ -10,7 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const formControl = 
   {
     margin: 1,
-    minWidth: 220,
+    minWidth: 200,
     backgroundColor: "rgb(255, 255, 255)"
   };
 

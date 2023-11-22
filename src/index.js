@@ -22,6 +22,8 @@ import MovieCastPage from "./pages/movieCastPage";
 import MovieActorsPage from "./pages/movieActorsPage"
 import MovieCrewPage from "./pages/movieCrewPage"
 import ActorPopularPage from "./pages/actorPopularPage"
+import SignIn from "./components/signIn";
+import SignUp from "./components/signUp";
 
 
 const queryClient = new QueryClient({
@@ -59,12 +61,13 @@ const App = () => {
         <Route path="/actors/actorsDaily" element={<ActorsDailyPage />} />
         <Route path="/movies/:id/actors/:id" element={<ActorPage />} />
         <Route path="/actors/popular" element={<ActorPopularPage />} />
-
         
-
+        
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
 
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/register" element={<SignUp />} />
       </Routes>
       </MoviesContextProvider>
     </BrowserRouter>

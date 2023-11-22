@@ -3,6 +3,7 @@ import Actor from "../actorCard";
 import Grid from "@mui/material/Grid";
 
 const ActorList = ({ actors, images }) => {
+  console.log("actors list", actors)
   return (
     <>
       {actors && images && actors.map((actor, index) => (
