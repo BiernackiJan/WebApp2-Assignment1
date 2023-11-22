@@ -31,6 +31,7 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const actorOptions = [
+    {label: "Popular Actors", path: "/actors/popular"},
     {label: "Trending Daily Actors",  path: "/actors/actorsDaily"},
     {label: "Trending Weekly Actors",  path: "/actors/actorsWeekly"}
   ]

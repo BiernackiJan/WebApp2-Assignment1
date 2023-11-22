@@ -9,6 +9,11 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 5
+  const startIndex = (currentPage - 1)*moviesPerPage
+  const endIndex = startIndex + moviesPerPage
+
   let displayedMovies = movies
     .filter((m) => {
       return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;

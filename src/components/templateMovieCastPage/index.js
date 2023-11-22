@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../headerMovieList";
 import ActorList from "../actorList";
 import Grid from "@mui/material/Grid";
@@ -7,11 +7,22 @@ import { getActorImages } from "../../api/tmdb-api";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import FilterCard from "../filterActorsCard";
+
 
 
 function MovieCastListPageTemplate({ movieCast,  title }) {
-    
+    const [nameFilter, setNameFilter] = useState("");
+
     let cast = movieCast.cast
+    .filter((a) => {
+      return a.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+    })
+    
+    const handleChange = (type, value) => {
+      if (type === "name") setNameFilter(value);
+    };
+    
     let crew = movieCast.crew    
 
     const { data: actorImage} = useQuery(
@@ -50,7 +61,7 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
 
     const containerStyle = {
       position: "absolute",
-      top: "20%",
+      top: "23%",
       left: "50%",
       transform: "translate(-50%, -50%)",
     };
@@ -83,6 +94,15 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
             </Button>
           ))}
         </div>
+
+        <Grid item container spacing={5} style={{marginTop: 5}}>
+          <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <FilterCard
+              onUserInput={handleChange}
+              nameFilter={nameFilter}
+              />
+          </Grid>
+        </Grid>
         
 
         <Grid item container spacing={5}></Grid>
@@ -94,7 +114,7 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
           <ActorList images={actorImages} actors={cast}></ActorList>
         </Grid>
 
-        <Typography variant="h3" component="h3" sx={{marginTop: 10, marginBottom: -3}}>
+        <Typography variant="h3" component="h3" sx={{marginTop: 5, marginBottom: -3}}>
           Crew:  
         </Typography>
         <Grid item container spacing={5}>

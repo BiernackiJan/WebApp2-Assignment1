@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../headerMovieList";
 import ActorList from "../actorList";
 import Grid from "@mui/material/Grid";
@@ -7,11 +7,21 @@ import { getActorImages } from "../../api/tmdb-api";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+import FilterCard from "../filterActorsCard";
 
 
 function MovieCastListPageTemplate({ movieCast,  title }) {
+    const [nameFilter, setNameFilter] = useState("");
+
+    let cast = movieCast.cast
+    .filter((a) => {
+      return a.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+    })
     
-    let cast = movieCast.cast    
+    const handleChange = (type, value) => {
+      if (type === "name") setNameFilter(value);
+    };
+
 
     const { data: actorImage} = useQuery(
       cast.map((actor) => actor.id),
@@ -38,24 +48,22 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
 
     const containerStyle = {
       position: "absolute",
-      top: "20%",
+      top: "23%",
       left: "50%",
       transform: "translate(-50%, -50%)",
     };
 
-
-
     const navigate = useNavigate();
 
     const actorImages = actorImage
-  
+
+   
     return (
       <>
       <Grid container sx={{ padding: '20px' }}>
         <Grid item xs={12}>
           <Header title={title} />
         </Grid>
-
         
         <div style={containerStyle}>
           {menuOptions.map((opt) => (
@@ -70,9 +78,17 @@ function MovieCastListPageTemplate({ movieCast,  title }) {
             </Button>
           ))}
         </div>
-        
 
         <Grid item container spacing={5}></Grid>
+
+        <Grid item container spacing={5} style={{marginTop: 5}}>
+          <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
+            <FilterCard
+              onUserInput={handleChange}
+              nameFilter={nameFilter}
+              />
+          </Grid>
+        </Grid>
 
         <Typography variant="h3" component="h3" sx={{ marginBottom: -4, marginTop: 5}}>
           Actors:  

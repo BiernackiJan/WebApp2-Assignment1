@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 const ActorCard = ({ actor }) => {
   const { data: images, error } = useQuery(["actorImages", actor.id], () => getActorImages(actor.id));
 
+  // console.log(actor)
+
   if (error) {
     console.error("Error fetching actor images:", error);
   }
