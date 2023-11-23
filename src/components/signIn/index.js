@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig"
 import '../../login.css';
 
@@ -22,6 +22,8 @@ const Login = () => {
       console.error("Error signing in:", error.message);
     }
   };
+
+  const handleRegister = navigate("/register")
 
   return (
     <section className="body">
@@ -303,6 +305,11 @@ const Login = () => {
             <div className="inputBox">
               <input type="submit" value={"Login"}/>
             </div>
+            <Link to={handleRegister}>
+              <div className="inputBox">
+                <input type="register" value={"Register"}/>
+              </div>
+            </Link>
           </form>
         </div>
       </div>

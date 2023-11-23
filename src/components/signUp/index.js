@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig"
 import '../../login.css';
 
@@ -11,6 +11,9 @@ const navigate = useNavigate();
 
 const [error, setError] = useState(null);
 
+
+
+  const handleLogin = navigate("/login")
   
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -315,6 +318,11 @@ const [error, setError] = useState(null);
             <div className="inputBox">
               <input type="submit" value={"Register"}/>
             </div>
+            <Link to={handleLogin}>
+              <div className="inputBox">
+                <input type="register" value={"Login"}/>
+              </div>
+            </Link>
           </form>
         </div>
       </div>
