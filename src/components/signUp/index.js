@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig"
 import '../../login.css';
 
 const SignUp = () => {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+const [error, setError] = useState(null);
 const navigate = useNavigate();
 
-const [error, setError] = useState(null);
-
-
-
-  const handleLogin = navigate("/login")
   
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -28,15 +24,16 @@ const [error, setError] = useState(null);
         }
 
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/login"); // Redirect to the home page after successful login
-    } catch (error) {
+      navigate("/login");
+    } 
+    catch (error) {
         if (error.code === "auth/email-already-in-use") {
         setError("Email is already in use");
       } else {
         console.error("Registration error:", error);
       }
     }
-  };
+};
 
   return (
     <section className="body">
@@ -318,11 +315,6 @@ const [error, setError] = useState(null);
             <div className="inputBox">
               <input type="submit" value={"Register"}/>
             </div>
-            <Link to={handleLogin}>
-              <div className="inputBox">
-                <input type="register" value={"Login"}/>
-              </div>
-            </Link>
           </form>
         </div>
       </div>

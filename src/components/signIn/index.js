@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig"
 import '../../login.css';
 
@@ -9,7 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null)
   const navigate = useNavigate();
-
   
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ const Login = () => {
     }
   };
 
-  const handleRegister = navigate("/register")
+  
 
   return (
     <section className="body">
@@ -305,11 +304,6 @@ const Login = () => {
             <div className="inputBox">
               <input type="submit" value={"Login"}/>
             </div>
-            <Link to={handleRegister}>
-              <div className="inputBox">
-                <input type="register" value={"Register"}/>
-              </div>
-            </Link>
           </form>
         </div>
       </div>
