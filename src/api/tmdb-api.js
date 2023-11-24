@@ -23,7 +23,6 @@ export const getMovies = async () => {
 };
   
 export const getMovie = (args) => {
-  // console.log(args)
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
@@ -59,7 +58,7 @@ export const getMovieImages = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}&include_image_language=en`
   ).then( (response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -255,5 +254,31 @@ export const getPopularActors = () => {
   .catch((error) => {
      throw error
   });
+};
+
+
+
+export const getSortedMovies = async (sort) => {
+  const totalPagesToFetch = 10;
+  const moviePromises = [];
+
+  for (let page = 1; page <= totalPagesToFetch; page++) {
+    moviePromises.push(
+      fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}${sort}`
+      ).then((response) => {
+        if (!response.ok) {
+          throw new Error(response.json().message);
+        }
+        return response.json();
+      })
+    );
+  }
+
+  return Promise.all(moviePromises)
+    .then((moviesData) => moviesData.flatMap((data) => data.results))
+    .catch((error) => {
+      throw error;
+    });
 };
 

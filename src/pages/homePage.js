@@ -1,5 +1,5 @@
 import React from "react";
-import { getMovies } from "../api/tmdb-api";
+import { getMovies, getSortedMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
@@ -9,7 +9,8 @@ import '../../src/login.css';
 
 const HomePage = () => {
 
-  const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
+  const {  data: unsortedMovies, error, isLoading, isError }  = useQuery('discover', getMovies)
+  
 
   if (isLoading) {
     return <Spinner />
@@ -19,7 +20,7 @@ const HomePage = () => {
     return <h1>{error.message}</h1>
   }  
 
-  const movies = data || [];
+  const movies = unsortedMovies;
 
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)

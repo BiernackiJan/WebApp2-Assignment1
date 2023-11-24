@@ -32,7 +32,7 @@ const MovieDetails = ({ movie }) => {
   const {id} = useParams(); 
   const {data: credits} = useQuery(["credits", {id}], () => getCast(id))
 
-
+  
   const { data: bestActors, error: bestActorsError } = useQuery(
     ["bestActors", id],
     () => credits?.cast.slice(0, 9),

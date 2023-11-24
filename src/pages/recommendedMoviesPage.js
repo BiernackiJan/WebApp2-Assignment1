@@ -15,7 +15,6 @@ const RecommendedMoviesPage = (props) => {
       () => getRecommendedMovies(id)
    );
 
-  console.log(data)
 
   if (isLoading) {
     return <Spinner />

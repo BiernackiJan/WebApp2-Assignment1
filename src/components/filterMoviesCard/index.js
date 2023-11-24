@@ -51,6 +51,14 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const handleYearChange = (e) => {
+    handleChange(e, "year", e.target.value);
+  };
+
+  const handleOrderChange = (e) => {
+    handleChange(e, "order", e.target.value);
+  };
+
   return (
     <Card 
       sx={{
@@ -89,6 +97,36 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+        <TextField
+          sx={{ ...formControl }}
+          id="filled-year"
+          label="Year"
+          type="number"
+          variant="filled"
+          value={props.yearFilter}
+          onChange={handleYearChange}
+        />
+        <FormControl sx={{...formControl}}>
+          <Select
+            labelId="sort-filter"
+            id="sort-select"
+            defaultValue=""
+            value={props.orderFilter}
+            onChange={handleOrderChange}
+          >
+            <MenuItem value=" "> All </MenuItem>
+            <MenuItem value="&sort_by=popularity.asc"> Popularity Ascending </MenuItem>
+            <MenuItem value="&sort_by=popularity.desc"> Popularity Descending </MenuItem>
+            <MenuItem value="&sort_by=revenue.asc"> Revenue Ascending </MenuItem>
+            <MenuItem value="&sort_by=revenue.desc"> Revenue Descending </MenuItem>
+            <MenuItem value="&sort_by=primary_release_date.asc"> Primary Release Date Ascending </MenuItem>
+            <MenuItem value="&sort_by=primary_release_date.desc"> Primary Release Date Descending </MenuItem>
+            <MenuItem value="&sort_by=vote_average.asc"> Vote Average Ascending </MenuItem>
+            <MenuItem value="&sort_by=vote_average.desc"> Vote Average Descending </MenuItem>
+            <MenuItem value="&sort_by=vote_count.asc"> Vote Count Ascending </MenuItem>
+            <MenuItem value="&sort_by=vote_count.desc"> Vote Count Descending </MenuItem>
+          </Select>
+        </FormControl>
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
@@ -97,9 +135,6 @@ export default function FilterMoviesCard(props) {
       />
       <CardContent>
         <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
         </Typography>
       </CardContent>
     </Card>
