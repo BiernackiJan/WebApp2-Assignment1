@@ -7,7 +7,7 @@ import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import '../../src/login.css';
 
 
-const HomePage = (props) => {
+const HomePage = () => {
 
   const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
 
@@ -18,7 +18,8 @@ const HomePage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
-  const movies = data.results;
+
+  const movies = data || [];
 
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)

@@ -3,6 +3,8 @@ import Header from "../headerMovieList";
 import FilterCard from "../filterMoviesCard";
 import MovieList from "../movieList";
 import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
+
 
 function MovieListPageTemplate({ movies, title, action }) {  
   const [nameFilter, setNameFilter] = useState("");
@@ -10,7 +12,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   const genreId = Number(genreFilter);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 5
+  const moviesPerPage = 23
   const startIndex = (currentPage - 1)*moviesPerPage
   const endIndex = startIndex + moviesPerPage
 
@@ -21,10 +23,22 @@ function MovieListPageTemplate({ movies, title, action }) {
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
+  
+  const paginatedMovies = displayedMovies.slice(startIndex, endIndex);
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
     else setGenreFilter(value);
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0,
+      
+    });
   };
 
   return (
@@ -40,7 +54,15 @@ function MovieListPageTemplate({ movies, title, action }) {
             genreFilter={genreFilter}
           />
         </Grid>
-        <MovieList action={action} movies={displayedMovies}></MovieList>
+        <MovieList action={action} movies={paginatedMovies}></MovieList>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px', fontSize: 'large' }}>
+        <Pagination
+          count={Math.ceil(displayedMovies.length / moviesPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ "& .MuiPaginationItem-root": { fontSize: '1em' } }}
+        />
+        </Grid>
       </Grid>
     </Grid>
   );
