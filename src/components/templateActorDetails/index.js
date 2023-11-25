@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 const TemplateActorDetailsPage = ({ allMovies, title, children, action , actorDetails }) => {
 
   let displayedMovies = allMovies
-  // console.log("actMovies" , actorDetails)
     
   return (
     <>

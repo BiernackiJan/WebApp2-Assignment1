@@ -38,6 +38,13 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
+  const sort = props.orderFilter
+ 
+  console.log("sort", sort)
+  // if (sort[0].name !== "All"){
+  //   sort.unshift({ id:"0", name: "All" });
+  // }
+
   const handleChange = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW
@@ -110,7 +117,7 @@ export default function FilterMoviesCard(props) {
           <Select
             labelId="sort-filter"
             id="sort-select"
-            defaultValue=""
+            defaultValue=" "
             value={props.orderFilter}
             onChange={handleOrderChange}
           >

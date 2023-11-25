@@ -58,7 +58,7 @@ export const getMovieImages = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}&include_image_language=en`
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
   ).then( (response) => {
     if (!response.ok) {
       throw new Error(response.json().message);

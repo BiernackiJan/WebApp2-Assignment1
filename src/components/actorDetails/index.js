@@ -1,8 +1,6 @@
 import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import AppBar from "@mui/material/AppBar";
 
 const ActorDetails = ({ actorDetails }) => {
   return (

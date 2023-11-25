@@ -35,7 +35,7 @@ const MovieDetails = ({ movie }) => {
   
   const { data: bestActors, error: bestActorsError } = useQuery(
     ["bestActors", id],
-    () => credits?.cast.slice(0, 9),
+    () => credits?.cast.slice(0, 10),
     {
       enabled: !!credits, // only run if credits exists
     }

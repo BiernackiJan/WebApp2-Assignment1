@@ -12,7 +12,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [yearFilter, setYearFilter] = useState("");
-  const [orderFilter, setOrderFilter] = useState("");
+  const [orderFilter, setOrderFilter] = useState(" ");
   const genreId = Number(genreFilter);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +23,17 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   let { data, error, isLoading, isError, refetch  } = useQuery('discover', () => {
     if (orderFilter) {
+      movies = []
+      data = []
       return getSortedMovies(orderFilter);
     } else {
       return Promise.resolve( data = movies ); // Uses the passed-in movies when sortOrderFilter is empty
     }
   });
-
+  
+  React.useEffect(() => {
+    refetch();
+  }, [orderFilter]);
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
@@ -39,13 +44,6 @@ function MovieListPageTemplate({ movies, title, action }) {
       
     });
   };
-
-  React.useEffect(() => {
-    refetch();
-  }, [orderFilter]);
-
-  
-  console.log(orderFilter)
 
   let displayedMovies = data
     .filter((m) => {
@@ -74,6 +72,14 @@ function MovieListPageTemplate({ movies, title, action }) {
       <Grid item xs={12}>
         <Header title={title} />
       </Grid>
+      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px', fontSize: 'large' }}>
+          <Pagination
+            count={Math.ceil(displayedMovies.length / moviesPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+            sx={{ "& .MuiPaginationItem-root": { fontSize: '1em' } }}
+          />
+        </Grid>
       <Grid item container spacing={5}>
         <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
           <FilterCard
