@@ -43,31 +43,30 @@ const App = () => {
       <SiteHeader />
       <MoviesContextProvider>
       <Routes>
-        <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/movies/nowPlaying" element={<NowPlayingPage />} />
         <Route path="/movies/topRated" element={<TopRatedMoviePage />} />
-        <Route path="/movies/watchList" element={<WatchListPage />} />
         <Route path="/movies/:id/recommendations" element={<RecommendMoviesPage />} />
+        <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+        <Route path="/movies/watchList" element={<WatchListPage />} />
 
         <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
         <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
 
+        <Route path="/movies/:id/actors/:id" element={<ActorPage />} />
         <Route path="/movies/:id/actors" element={<MovieCastPage />} />
         <Route path="/movies/:id/actorsOnly" element={<MovieActorsPage />} />
         <Route path="/movies/:id/crewOnly" element={<MovieCrewPage />} />
+        <Route path="/actors/popular" element={<ActorPopularPage />} />
         <Route path="/actors/actorsWeekly" element={<ActorsWeeklyPage />} />
         <Route path="/actors/actorsDaily" element={<ActorsDailyPage />} />
-        <Route path="/movies/:id/actors/:id" element={<ActorPage />} />
-        <Route path="/actors/popular" element={<ActorPopularPage />} />
         
-        
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={ <Navigate to="/" /> } />
-
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
+
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
       </MoviesContextProvider>
     </BrowserRouter>
